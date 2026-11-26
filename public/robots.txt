@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /api/
+Disallow: /preview-frame
+
+Sitemap: https://beardash.dev/sitemap.xml

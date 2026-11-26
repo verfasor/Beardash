@@ -1,0 +1,8 @@
+# The dashboard moved from / to /dashboard/. Keep old bookmarks working.
+/posts          /dashboard/posts          301
+/posts/*        /dashboard/posts/:splat   301
+/pages          /dashboard/pages          301
+/pages/*        /dashboard/pages/:splat   301
+/media          /dashboard/media          301
+/settings       /dashboard/settings       301
+/guide          /dashboard/docs           301

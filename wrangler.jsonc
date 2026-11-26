@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "beardash",
+  "main": "./worker/index.ts",
+  "compatibility_date": "2025-09-01",
+  // Off on purpose: requests carry users' API keys in headers, and Beardash promises not to keep them anywhere.
+  "observability": { "enabled": false },
+  // Per-IP limit on the pass-through (Bear itself allows 60 requests a minute per key).
+  "ratelimits": [{ "name": "LIMITER", "namespace_id": "1001", "simple": { "limit": 120, "period": 60 } }],
+  // The deployed version's id, shown as the build number (b + first 6 characters) in the dashboard sidebar.
+  "version_metadata": { "binding": "CF_VERSION_METADATA" },
+  // beardash.dev is the canonical address; www.beardash.dev redirects here (see wrangler.www.jsonc).
+  "routes": [{ "pattern": "beardash.dev", "custom_domain": true }],
+  // Kept on so anything saved in the browser at beardash.mighil.workers.dev stays reachable (export it, import at beardash.dev).
+  "workers_dev": true,
+  "assets": {
+    "binding": "ASSETS",
+    // "/" is the static landing page; the app is a single-page app under /dashboard/ (served by the Worker).
+    "not_found_handling": "404-page",
+    // The Worker sees /, /api/*, /dashboard* and single-word paths (the beardash.dev/<subdomain> shortcut). Files, hashed bundles,
+    // icons, the preview sandbox and legacy redirects go straight to static assets.
+    "run_worker_first": ["/*", "!/*.*", "!/assets/*", "!/icons/*", "!/preview-frame", "!/posts", "!/posts/*", "!/pages", "!/pages/*", "!/media", "!/settings", "!/guide"]
+  }
+}

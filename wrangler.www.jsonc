@@ -1,0 +1,10 @@
+{
+  // Redirects www.beardash.dev to the apex. Deploy with: npm run deploy:www
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "beardash-www",
+  "main": "./www/worker.ts",
+  "compatibility_date": "2025-09-01",
+  "workers_dev": false,
+  "observability": { "enabled": false },
+  "routes": [{ "pattern": "www.beardash.dev", "custom_domain": true }]
+}

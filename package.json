@@ -1,0 +1,46 @@
+{
+  "name": "beardash",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "deploy": "npm run build && wrangler deploy",
+    "deploy:www": "wrangler deploy -c wrangler.www.jsonc",
+    "deploy:preview": "node scripts/build-preview.mjs && wrangler deploy -c wrangler.preview.jsonc"
+  },
+  "dependencies": {
+    "@codemirror/autocomplete": "^6.20.4",
+    "@codemirror/commands": "^6.11.2",
+    "@codemirror/lang-css": "^6.3.1",
+    "@codemirror/lang-markdown": "^6.5.2",
+    "@codemirror/language": "^6.13.1",
+    "@codemirror/language-data": "^6.5.2",
+    "@codemirror/search": "^6.7.3",
+    "@codemirror/state": "^6.7.6",
+    "@codemirror/view": "^6.44.0",
+    "@lezer/highlight": "^1.2.5",
+    "codemirror": "^6.0.2",
+    "dompurify": "^3.5.0",
+    "hono": "^4.13.22",
+    "marked": "^18.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "turndown": "^7.2.0",
+    "turndown-plugin-gfm": "^1.0.2"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.70.2",
+    "@cloudflare/workers-types": "^5.20261125.1",
+    "@types/react": "^19.3.3",
+    "@types/react-dom": "^19.3.0",
+    "@types/turndown": "^5.0.6",
+    "@vitejs/plugin-react": "^6.3.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "wrangler": "^4.168.0"
+  }
+}

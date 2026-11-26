@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Beardash: a custom dashboard for Bear Blog</title>
+    <meta
+      name="description"
+      content="Beardash is a custom dashboard for Bear Blog. A real Markdown editor with live preview, scheduling, revision history, a media library and every blog you run, in one place."
+    />
+    <link rel="canonical" href="https://beardash.dev/" />
+    <meta name="robots" content="index, follow" />
+    <meta name="referrer" content="no-referrer" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Beardash" />
+    <meta property="og:url" content="https://beardash.dev/" />
+    <meta property="og:title" content="Beardash: a custom dashboard for Bear Blog" />
+    <meta property="og:description" content="Write, schedule and publish to your Bear Blog from a real editor. Private by design: your API keys stay in your browser." />
+    <meta property="og:image" content="https://beardash.dev/og.jpg" />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="900" />
+    <meta property="og:image:alt" content="Beardash pixel-bear logo above the text Beardash.dev" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Beardash: a custom dashboard for Bear Blog" />
+    <meta name="twitter:description" content="Write, schedule and publish to your Bear Blog from a real editor. Private by design: your API keys stay in your browser." />
+    <meta name="twitter:image" content="https://beardash.dev/og.jpg" />
+
+    <meta name="theme-color" content="#f5f5f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/icons/icon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/icons/icon-16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="preload" href="/fonts/lusitana-400-v2.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/src/landing.css" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Beardash",
+        "url": "https://beardash.dev/",
+        "image": "https://beardash.dev/og.jpg",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any (web browser)",
+        "browserRequirements": "Requires a modern web browser",
+        "description": "A custom dashboard for Bear Blog: Markdown editor with live preview, scheduling, revision history, media library and multi-blog support. API keys stay in the browser."
+      }
+    </script>
+  </head>
+  <body>
+    <header class="top">
+      <a class="brand" href="/" aria-label="Beardash home">
+        <svg class="brand-mark" width="32" height="32" viewBox="0 0 32 32" shape-rendering="crispEdges" fill="currentColor" aria-hidden="true"><path d="M0,0H6V2H2V8H0Z"/><path d="M0,0H6V8H4V2H0Z" transform="translate(26)"/><path d="M0,0H2V2H0Z" transform="translate(6 2)"/><path d="M2,0H4V8H2V6H0V4H2Z" transform="translate(22 2)"/><path d="M0,0H14V2H0Z" transform="translate(8 4)"/><path d="M0,0H2V2H0Z" transform="translate(6 6)"/><path d="M0,0H4V4H2V2H0Z" transform="translate(2 8)"/><path d="M0,0H2V2H0Z" transform="translate(14 8)"/><path d="M0,0H2V2H0Z" transform="translate(18 8)"/><path d="M0,0H2V2H0Z" transform="translate(28 8)"/><path d="M0,0H2V2H0Z" transform="translate(26 10)"/><path d="M0,0H2V8H0Z" transform="translate(2 12)"/><path d="M2,0H8V4H6V8h4v2H0V8H4V4H2Z" transform="translate(12 12)"/><path d="M0,0H2V8H0Z" transform="translate(28 12)"/><path d="M0,0H2V2H0Z" transform="translate(10 18)"/><path d="M0,0H2V2H0Z" transform="translate(22 18)"/><path d="M2,0H4V4H0V2H2Z" transform="translate(2 20)"/><path d="M0,0H2V2H4V4H0Z" transform="translate(26 20)"/><path d="M0,0H2V2H0Z" transform="translate(0 24)"/><path d="M0,0H4V2H0Z" transform="translate(6 24)"/><path d="M0,0H4V2H0Z" transform="translate(22 24)"/><path d="M0,0H2V2H0Z" transform="translate(30 24)"/><path d="M0,0H2V2H0Z" transform="translate(2 26)"/><path d="M0,0H12V2H0Z" transform="translate(10 26)"/><path d="M0,0H2V2H0Z" transform="translate(28 26)"/><path d="M0,0H4V2H0Z" transform="translate(4 28)"/><path d="M0,0H4V2H0Z" transform="translate(24 28)"/><path d="M0,0H16V2H0Z" transform="translate(8 30)"/></svg>
+      </a>
+      <span class="top-build"></span>
+    </header>
+
+    <main class="main">
+      <h1>Beardash is a calm, modern dashboard for managing your Bear Blog.</h1>
+
+      <p>Getting started is simple: paste your Bear Blog's API key and start writing. Beardash has no remote database. Your API keys and history stay in your browser.</p>
+
+      <p class="flow">
+        Write with a <span class="nw"><span class="pill" tabindex="0"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4-1 10-10-3-3L5 16l-1 4zM13.5 7.5l3 3" /></svg>live preview<span class="peek peek-wide" aria-hidden="true"><span class="pk-win"><span class="pk-bar"><span class="pk-seg"><b>Write</b><b class="on">Split</b><b>Preview</b></span><span class="pk-btn pk-primary">Publish…</span></span><span class="pk-toolbar"><b class="pk-tbh">H1</b><b class="pk-tbh">H2</b><span class="pk-tbsep"></span><svg class="pk-tb" viewBox="0 0 24 24"><path d="M7 5h6a3.5 3.5 0 0 1 0 7H7zM7 12h7a3.5 3.5 0 0 1 0 7H7z"/></svg><svg class="pk-tb" viewBox="0 0 24 24"><path d="M14 5h-4M14 19h-4M14 5l-4 14"/></svg><svg class="pk-tb" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.66 0l2.83-2.83a4 4 0 0 0-5.66-5.66l-.7.7M14 10a4 4 0 0 0-5.66 0l-2.83 2.83a4 4 0 0 0 5.66 5.66l.7-.7"/></svg><svg class="pk-tb" viewBox="0 0 24 24"><path d="M4 4h16v16H4zM9.5 9.5h.01M20 15l-4.5-4.5L6 20"/></svg><svg class="pk-tb" viewBox="0 0 24 24"><path d="M8 7H5.5v5H9v1c0 2-1.5 3-3 3.5M18 7h-2.5v5H19v1c0 2-1.5 3-3 3.5"/></svg><small class="pk-wc">12 words · 1 min read</small></span><span class="pk-split"><span class="pk-pane"><span class="pk-title">Slow mornings</span><span class="pk-md"><i>#</i> Coffee first</span><span class="pk-md">Write <i>**</i>one<i>**</i> good line,</span><span class="pk-md">then another.</span><span class="pk-md"><i>![</i>Sunrise<i>](sunrise.webp)</i></span><span class="pk-md"><i>&gt;</i> The rest can wait.</span><span class="pk-caret"></span></span><span class="pk-pane pk-prev"><span class="pk-title">Slow mornings</span><span class="pk-h">Coffee first</span><span class="pk-serif">Write <b>one</b> good line, then another.</span><svg class="pk-art" viewBox="0 0 160 84" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="pkSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3b58a"/><stop offset=".55" stop-color="#f6d6a8"/><stop offset="1" stop-color="#fbeed8"/></linearGradient><linearGradient id="pkLake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9db7c9"/><stop offset="1" stop-color="#6f8fa8"/></linearGradient></defs><rect width="160" height="84" fill="url(#pkSky)"/><circle cx="104" cy="44" r="13" fill="#fff4dc"/><path d="M0 50 L22 34 L38 44 L58 26 L80 46 L96 38 L118 50 L136 36 L160 48 V60 H0Z" fill="#8a6f86"/><path d="M0 54 L30 42 L52 52 L74 40 L98 54 L124 44 L160 56 V60 H0Z" fill="#5f4f6b"/><rect y="58" width="160" height="26" fill="url(#pkLake)"/><rect x="92" y="61" width="24" height="2" rx="1" fill="#fff4dc" opacity=".7"/><rect x="96" y="66" width="16" height="2" rx="1" fill="#fff4dc" opacity=".5"/><rect x="99" y="71" width="10" height="2" rx="1" fill="#fff4dc" opacity=".35"/></svg><span class="pk-quote">The rest can wait.</span></span></span></span></span></span>,</span> schedule a post for <span class="nw"><span class="pill" tabindex="0"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14" rx="2.5" /><path d="M4 10h16M9 3.5v4M15 3.5v4" /></svg><span class="sched-day">Sunday</span> morning<span class="peek" aria-hidden="true"><span class="pk-modal">  <span class="pk-head"><span class="pk-h2">Publish post</span><svg class="pk-ic" viewBox="0 0 24 24"><path d="M17 7 7 17M7 7l10 10"/></svg></span>  <span class="pk-sub">Goes live at yourblog.bearblog.dev/slow-mornings</span>  <span class="pk-choice"><span class="pk-radio"></span><span><b>Now</b><small>Visible on your blog immediately</small></span></span>  <span class="pk-choice on"><span class="pk-radio on"></span><span><b>Schedule</b><small>Bear publishes it at the time you pick</small></span></span>  <span class="pk-label">Date and time</span><span class="pk-input"><span class="sched-date">Sun, Nov 30</span> · 9:00 AM</span>  <span class="pk-foot"><span class="pk-btn">Cancel</span><span class="pk-btn pk-primary">Schedule</span></span></span></span></span>,</span>
+        roll back to <span class="nw"><span class="pill" tabindex="0"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3L4.5 9" /><path d="M4.5 4.5V9H9M12 8v4l2.5 2" /></svg>yesterday's draft<span class="peek" aria-hidden="true"><span class="pk-modal">  <span class="pk-head"><span class="pk-h2">History</span><svg class="pk-ic" viewBox="0 0 24 24"><path d="M17 7 7 17M7 7l10 10"/></svg></span>  <span class="pk-row"><span><b>Today, 10:42</b><small>Current · 2 minutes ago</small></span></span>  <span class="pk-row on"><span><b>Yesterday, 21:15</b><small>13 hours ago</small></span></span>  <span class="pk-row"><span><b>Nov 24, 08:03</b><small>2 days ago</small></span></span>  <span class="pk-note">The last 50 saves are kept in this browser.</span>  <span class="pk-foot"><span class="pk-btn pk-primary">Restore this version</span></span></span></span></span>,</span> drop in a <span class="nw"><span class="pill" tabindex="0"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2.5" /><circle cx="9" cy="10" r="1.6" /><path d="M20 16l-5-5-8 8" /></svg>photo<span class="peek" aria-hidden="true"><span class="pk-modal">  <span class="pk-head"><span class="pk-h2">Insert image</span><svg class="pk-ic" viewBox="0 0 24 24"><path d="M17 7 7 17M7 7l10 10"/></svg></span>  <span class="pk-seg pk-seg-full"><b class="on">Upload</b><b>Media library</b><b>From URL</b></span>  <span class="pk-drop"><svg class="pk-ic pk-ic-lg" viewBox="0 0 24 24"><path d="M12 15V5M8 9l4-4 4 4M5 15v3a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3"/></svg><b>Drop an image or click to browse</b><small>PNG, JPG, GIF, WebP or SVG, up to 10 MB</small></span>  <span class="pk-label">Alt text</span><span class="pk-input pk-ph">A brown bear fishing in a river</span></span></span></span>,</span> or hop
+        between all your <span class="nw"><span class="pill" tabindex="0"><span class="pill-kao" aria-hidden="true">ʕ•ᴥ•ʔ</span>blogs<span class="peek peek-narrow" aria-hidden="true"><span class="pk-menu">  <span class="pk-menu-label">Blogs</span>  <span class="pk-mrow on"><span class="pk-av" style="--h:150">G</span><b>Garden notes</b><svg class="pk-ic" viewBox="0 0 24 24"><path d="M5 12.5 10 17 19 7.5"/></svg></span>  <span class="pk-mrow"><span class="pk-av" style="--h:20">S</span><b>Slow software</b></span>  <span class="pk-mrow"><span class="pk-av" style="--h:250">W</span><b>Weekly links</b></span>  <span class="pk-sep"></span>  <span class="pk-mrow pk-add"><svg class="pk-ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><b>Add a blog</b></span></span></span></span>.</span>
+      </p>
+
+      <p class="cta"><a class="cta-link" href="/dashboard"><span class="cta-text">Open dashboard</span><svg class="cta-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg></a></p>
+    </main>
+
+
+    <footer class="foot">
+      <span>&copy; 2026 Beardash by <a class="foot-link" href="https://mighil.com" rel="noopener">Mighil</a> <span class="nw">(Not affiliated with <a class="foot-link" href="https://bearblog.dev?ref=beardash" rel="noopener">Bear Blog</a>)</span></span>
+      <button class="foot-link" type="button" popovertarget="privacy">Privacy</button>
+      <button class="foot-link" type="button" popovertarget="quickstart">Quick start</button>
+    </footer>
+
+    <div id="quickstart" class="sheet" popover aria-labelledby="quickstart-title">
+      <div class="sheet-head">
+        <h2 id="quickstart-title">Quick start</h2>
+        <button class="sheet-close" type="button" popovertarget="quickstart" popovertargetaction="hide" aria-label="Close">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7 7 17M7 7l10 10" /></svg>
+        </button>
+      </div>
+      <ol class="steps">
+        <li><b>Get an API key.</b> In Bear, open Settings → API and create a key. API access needs an upgraded Bear plan.</li>
+        <li><b>Connect your blog.</b> Open the dashboard, enter your blog's subdomain and paste the key.</li>
+        <li><b>Write.</b> Start a new post in Markdown with a live preview. Paste or drop images to upload them.</li>
+        <li><b>Publish or schedule.</b> Choose Publish to post now, or pick a date and time and Bear publishes it for you.</li>
+        <li><b>Add more blogs.</b> Click your blog's name at the top left, then Add a blog. Each blog has its own key.</li>
+        <li><b>Keep it safe.</b> Open the menu at the bottom of the sidebar, then Keys &amp; data. Set a passphrase, or export an encrypted backup to use Beardash on another device.</li>
+      </ol>
+      <p class="sheet-note">Press ? in the dashboard to see keyboard shortcuts. The full guide is under Docs in the sidebar.</p>
+      <p class="sheet-cta"><a class="cta-link" href="/dashboard"><span class="cta-text">Open dashboard</span><svg class="cta-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg></a></p>
+    </div>
+
+    <div id="privacy" class="sheet" popover aria-labelledby="privacy-title">
+      <div class="sheet-head">
+        <h2 id="privacy-title">Privacy</h2>
+        <button class="sheet-close" type="button" popovertarget="privacy" popovertargetaction="hide" aria-label="Close">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 7 7 17M7 7l10 10" /></svg>
+        </button>
+      </div>
+      <p>Beardash has no accounts and no database. There's nothing to sign up for and nowhere for us to keep your data.</p>
+      <ul>
+        <li><b>Your API keys stay in your browser.</b> They're saved in your browser's storage, and you can encrypt them with a passphrase. They're never stored on our servers.</li>
+        <li><b>Requests pass straight through.</b> Beardash talks to Bear through a small Cloudflare Worker that forwards each request and keeps nothing. It has no logs, no cookies and no database.</li>
+        <li><b>Your writing stays local.</b> Revision history and unsaved drafts are kept in your browser too. Your posts live on Bear, as they always have.</li>
+        <li><b>No tracking.</b> Beardash uses no analytics, no ad trackers and no cookies.</li>
+        <li><b>Abuse protection.</b> Cloudflare briefly counts requests per IP address to stop abuse. Beardash doesn't store or see those counts.</li>
+      </ul>
+      <p>Clearing your browser's data for this site removes everything Beardash saved. Your blog on Bear isn't affected.</p>
+      <p class="sheet-note">Beardash isn't affiliated with Bear Blog. Bear's own privacy policy covers your blog and your Bear account.</p>
+      <p class="sheet-note">Logo: <a href="https://www.svgrepo.com/svg/327853/bear-face-light" rel="noopener noreferrer" target="_blank">Bear Face Light</a> from the Retro Pixel Icons collection by <a href="https://www.svgrepo.com/author/Buninux/" rel="noopener noreferrer" target="_blank">Buninux</a>, via SVG Repo.</p>
+    </div>
+  </body>
+</html>

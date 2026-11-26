@@ -1,0 +1,9 @@
+{
+  // Optional: serves the script-enabled post preview from its own domain (like githubusercontent.com),
+  // so post scripts are isolated from Beardash at the site level, not just by the iframe sandbox.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "beardash-preview",
+  "compatibility_date": "2025-09-01",
+  "observability": { "enabled": false },
+  "assets": { "directory": "./dist-preview" }
+}

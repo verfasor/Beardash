@@ -1,0 +1,28 @@
+# dependencies and builds
+node_modules
+dist
+dist-preview
+.wrangler
+
+# secrets and local config (never commit)
+.env
+.env.*
+.dev.vars
+.dev.vars.*
+*.local
+*.pem
+*.key
+
+# agent skills, assistant settings and editor state
+.agents
+.claude
+CLAUDE.md
+.vscode
+.idea
+
+# temporary local testing config
+vite.mock.config.ts
+
+# noise
+*.log
+.DS_Store

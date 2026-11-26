@@ -1,0 +1,283 @@
+import type { ReactNode } from 'react'
+import { Icon, Kbd, MOD, type IconName } from '../ui'
+import { ShortcutList } from '../shortcuts'
+
+type Section = { id: string; title: string; icon: IconName; body: ReactNode }
+
+const SECTIONS: Section[] = [
+  {
+    id: 'start',
+    title: 'Getting started',
+    icon: 'home',
+    body: (
+      <>
+        <p>Beardash is an editor and dashboard for your Bear Blog. It talks to Bear through Bear's official API, so everything you do here happens on your real blog.</p>
+        <ol>
+          <li>
+            In Bear, open <b>Settings → API</b> and create a key. The API needs an upgraded Bear plan.
+          </li>
+          <li>In Beardash, enter your blog's subdomain and paste the key.</li>
+          <li>
+            Use the sidebar to move between <b>Overview</b>, <b>Posts</b>, <b>Pages</b>, <b>Media</b> and <b>Settings</b>.
+          </li>
+        </ol>
+      </>
+    ),
+  },
+  {
+    id: 'writing',
+    title: 'Writing',
+    icon: 'posts',
+    body: (
+      <>
+        <p>
+          Click <b>New post</b>. Give it a title, then write in Markdown. HTML and LaTeX work too, just like in Bear.
+        </p>
+        <ul>
+          <li>
+            <b>Toolbar:</b> headings, bold, italic, links, images, quotes, lists, code, tables and dividers. Select text first to format it.
+          </li>
+          <li>
+            <b>Images:</b> paste or drop an image straight into the editor to upload it. Or use the image button to upload, pick from your
+            media library, or insert by URL. Add alt text so screen readers can describe it.
+          </li>
+          <li>
+            <b>Pasting:</b> copy from a web page, Google Docs, Notion, Word or an email and the formatting comes in as Markdown: headings,
+            bold, italic, links, lists, quotes, code and tables. Styling like fonts and colours is dropped. To paste plain text instead, use{' '}
+            <Kbd>{MOD}</Kbd>
+            <Kbd>⇧</Kbd>
+            <Kbd>V</Kbd>.
+          </li>
+          <li>
+            <b>View modes:</b> switch between <b>Write</b>, <b>Split</b> and <b>Preview</b> at the top. In Split, the preview scrolls with
+            you.
+          </li>
+          <li>
+            <b>Focus mode</b> (<Kbd>{MOD}</Kbd>
+            <Kbd>.</Kbd>) hides the toolbars so it's just you and the words.
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    id: 'publishing',
+    title: 'Saving & publishing',
+    icon: 'send',
+    body: (
+      <>
+        <ul>
+          <li>
+            <b>Save draft</b> saves to Bear without publishing. <Kbd>{MOD}</Kbd>
+            <Kbd>S</Kbd> works anywhere in the editor.
+          </li>
+          <li>
+            <b>Publish…</b> asks whether to publish now or <b>schedule</b> it for a date and time. Scheduling is Bear's own feature: Bear
+            publishes the post even when Beardash is closed.
+          </li>
+          <li>
+            Once a post is live, the button becomes <b>Update post</b>. To take a post down, use the <b>⋯</b> menu and choose{' '}
+            <b>Unpublish</b>, which moves it back to drafts.
+          </li>
+          <li>
+            The <b>settings panel</b> (the sidebar icon at the top right of the editor) holds the slug, tags, publish date,
+            discoverability, SEO fields, alias, CSS class and language.
+          </li>
+          <li>
+            <b>Social images and favicons:</b> Bear only takes a link for these. In Beardash you can paste a URL, click <b>Upload</b> to
+            send a file straight to Bear, or pick one from your <b>Library</b>. This works for a post's social image in the settings panel,
+            and for your blog's <b>favicon</b> and <b>social image</b> under Settings. Uploads keep their original size and format, so
+            every site can show them.
+          </li>
+          <li>
+            <b>Pages</b> work the same way as posts, but don't appear in your post list or feed. They're good for About or Now pages.
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    id: 'history',
+    title: 'Autosave & history',
+    icon: 'history',
+    body: (
+      <ul>
+        <li>
+          <b>Autosave:</b> while you type, Beardash keeps a backup of unsaved changes. If a tab closes before you save, you'll be offered{' '}
+          <b>Restore</b> next time you open that post.
+        </li>
+        <li>
+          <b>History:</b> every save is snapshotted, keeping the last 50 per post. Open the clock icon in the editor to read an older version
+          and restore it. Restoring puts the text back in the editor; it only reaches Bear when you save. Bear doesn't keep old versions, so
+          the first time you save a post, Beardash also keeps the version that was on Bear, marked <b>From Bear</b>. The same happens if
+          the post was changed on Bear's site since your last save here.
+        </li>
+        <li>Both live in this browser only. Use a backup (see below) to move them to another device.</li>
+      </ul>
+    ),
+  },
+  {
+    id: 'scripts',
+    title: 'Previewing scripts',
+    icon: 'code',
+    body: (
+      <>
+        <p>
+          Bear runs <code>&lt;script&gt;</code> tags for upgraded blogs. To see them in Beardash, turn on <b>Run scripts</b> in the preview
+          pane. It's off by default.
+        </p>
+        <p>
+          Scripts run in an isolated sandbox: they can't see Beardash, your keys or your other posts, can't redirect the page, and can't show
+          pop-ups. The preview reloads about half a second after you stop typing.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: 'blogs',
+    title: 'Multiple blogs',
+    icon: 'pages',
+    body: (
+      <ul>
+        <li>
+          Click your blog's name at the <b>top left</b> to switch blogs, or choose <b>Add a blog</b> to connect another one with its own API
+          key.
+        </li>
+        <li>
+          <b>Shortcut:</b> go to <code>{location.host}/yourblog</code>, using your blog's subdomain. If you're new, the subdomain is filled
+          in for you. If you're signed in, Beardash offers to add that blog, or switches to it if it's already connected.
+        </li>
+        <li>Each browser tab remembers its own blog, so you can work on two blogs side by side.</li>
+        <li>
+          Hover a blog in that menu and click <b>×</b> to disconnect it. Beardash only forgets the key; nothing on Bear changes.
+        </li>
+      </ul>
+    ),
+  },
+  {
+    id: 'privacy',
+    title: 'Your data & privacy',
+    icon: 'shield',
+    body: (
+      <>
+        <p>
+          <b>Beardash has no database.</b> Your API keys, history and unsaved drafts stay in this browser. Requests to Bear pass through a
+          small Cloudflare Worker that stores and logs nothing.
+        </p>
+        <p>
+          Open <b>Keys &amp; data</b> (the shield icon at the bottom of the sidebar) to:
+        </p>
+        <ul>
+          <li>
+            <b>Set a passphrase</b> that encrypts your keys. You'll enter it when you open Beardash in a new tab or after a refresh.{' '}
+            <b>It can't be recovered if you forget it.</b>
+          </li>
+          <li>
+            <b>Export</b> an encrypted backup file, and <b>Import</b> it in another browser or device. This is how you move Beardash between
+            computers.
+          </li>
+          <li>
+            <b>Erase</b> everything Beardash stored in this browser.
+          </li>
+        </ul>
+        <p className="guide-note">Clearing your browser's site data also removes your keys and history. Keep a backup if that matters to you.</p>
+      </>
+    ),
+  },
+  {
+    id: 'shortcuts',
+    title: 'Keyboard shortcuts',
+    icon: 'keyboard',
+    body: (
+      <>
+        <p>
+          Press <Kbd>?</Kbd> anywhere outside a text field to see these at any time.
+        </p>
+        <ShortcutList />
+      </>
+    ),
+  },
+  {
+    id: 'trouble',
+    title: 'Limits & troubleshooting',
+    icon: 'alert',
+    body: (
+      <dl className="faq">
+        <dt>“Bear's rate limit hit”</dt>
+        <dd>Bear allows 60 requests a minute per key and 100 uploads a day. Wait the time shown and carry on. Nothing is lost.</dd>
+        <dt>“Reconnect your blog”</dt>
+        <dd>Bear rejected the saved key, usually because it was regenerated or revoked in Bear. Paste the new key from Bear → Settings → API.</dd>
+        <dt>Forgot the passphrase</dt>
+        <dd>
+          On the lock screen, choose <b>Reset Beardash in this browser</b>, then reconnect with your API keys or restore a backup. Your blogs
+          on Bear aren't affected.
+        </dd>
+        <dt>Uploads failing</dt>
+        <dd>Files must be under 10 MB. Images are resized to 1200px and converted to WebP unless you tick “Keep originals” on the Media page.</dd>
+        <dt>Preview looks different from my blog</dt>
+        <dd>The preview approximates Bear's default look. Your blog's theme and custom CSS apply only on the live site.</dd>
+      </dl>
+    ),
+  },
+  {
+    id: 'credits',
+    title: 'Credits',
+    icon: 'info',
+    body: (
+      <>
+      <p>
+        Beardash is made by{' '}
+        <a href="https://mighil.com" target="_blank" rel="noopener noreferrer">
+          Mighil
+        </a>
+        {' '}and runs on Cloudflare. If you use it a lot, a little support on{' '}
+        <a href="https://ko-fi.com/mighil" target="_blank" rel="noopener noreferrer">
+          Ko-fi
+        </a>{' '}
+        helps keep it hosted for the long run.
+      </p>
+      <p>
+        The Beardash logo is the{' '}
+        <a href="https://www.svgrepo.com/svg/327853/bear-face-light" target="_blank" rel="noopener noreferrer">
+          Bear Face Light
+        </a>{' '}
+        icon from the Retro Pixel Icons collection by{' '}
+        <a href="https://www.svgrepo.com/author/Buninux/" target="_blank" rel="noopener noreferrer">
+          Buninux
+        </a>
+        , via SVG Repo.
+      </p>
+      </>
+    ),
+  },
+]
+
+export function Docs() {
+  const jump = (id: string) => document.getElementById(`guide-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  return (
+    <div className="page">
+      <header className="page-header">
+        <div>
+          <h1 className="page-title">Docs</h1>
+          <p className="page-sub">How to use Beardash: writing, publishing, history, privacy and shortcuts.</p>
+        </div>
+      </header>
+      <div className="guide">
+      <nav className="guide-toc" aria-label="On this page">
+        {SECTIONS.map((s) => (
+          <button key={s.id} onClick={() => jump(s.id)}>
+            <Icon name={s.icon} size={14} />
+            {s.title}
+          </button>
+        ))}
+      </nav>
+      {SECTIONS.map((s) => (
+        <section key={s.id} id={`guide-${s.id}`} className="guide-section">
+          <h3>{s.title}</h3>
+          <div className="guide-card">{s.body}</div>
+        </section>
+      ))}
+      </div>
+    </div>
+  )
+}
