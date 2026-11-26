@@ -15,7 +15,7 @@ Beardash is an opinionated take on a Bear Blog dashboard, hence not accepting pu
 
 ## Verify what's running
 
-Cloudflare builds and deploys beardash.dev straight from this repo's `main` branch. The build number in the top-right corner of beardash.dev, and under **Source code** in the dashboard menu, is the commit it was built from. Click it to read that exact code.
+beardash.dev deploys straight from `main`. The short code in the top-right of the site (like `e453d8a`) is the commit it was built from, so click it to see that exact code here.
 
 ## Where to look
 
