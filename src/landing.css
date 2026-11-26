@@ -64,7 +64,8 @@ a { color: inherit; }
 .brand { display: block; color: var(--text); }
 .brand-mark { display: block; }
 .top { max-width: none; } /* header spans the page: logo on the left, build number at the far right */
-.top-build { font-size: 13px; color: var(--text-3); font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.top-build { font-size: 13px; color: var(--text-3); font-variant-numeric: tabular-nums; letter-spacing: 0.01em; text-decoration: none; }
+a.top-build:hover, a.top-build:focus-visible { color: var(--text-2); text-decoration: underline; text-underline-offset: 3px; }
 .top-links a { color: var(--text-2); text-decoration: none; font-size: 15px; }
 .top-links a:hover { color: var(--text); }
 

@@ -2,7 +2,9 @@
 
 A custom dashboard for [Bear Blog](https://bearblog.dev?ref=beardash). Use it at [beardash.dev](https://beardash.dev).
 
-This code is here so you can see exactly what Beardash does with your API keys. It isn't set up for contributions, and pull requests aren't accepted.
+This is the code that runs beardash.dev, published so you can see exactly what Beardash does with your API keys.
+
+Beardash is an opinionated take on a Bear Blog dashboard, hence not accepting pull requests. Feedback is welcome at [mighil@beardash.dev](mailto:mighil@beardash.dev), and you're free to fork it and make it your own within the [license](LICENSE).
 
 ## Privacy
 
@@ -10,6 +12,10 @@ This code is here so you can see exactly what Beardash does with your API keys. 
 - **Requests pass straight through.** Bear's API doesn't allow browser requests, so a small Cloudflare Worker forwards them to Bear. It has no storage, sets no cookies and logs nothing.
 - **Optional passphrase lock.** API keys can be encrypted in the browser with PBKDF2-SHA256 (600k iterations) and AES-256-GCM.
 - **Strict page security.** No inline or third-party scripts, and all HTML is sanitised before it enters the page. Post scripts only run in a sandboxed preview frame that can't reach the app.
+
+## Verify what's running
+
+Cloudflare builds and deploys beardash.dev straight from this repo's `main` branch. The build number in the top-right corner of beardash.dev, and under **Source code** in the dashboard menu, is the commit it was built from. Click it to read that exact code.
 
 ## Where to look
 
@@ -21,6 +27,10 @@ This code is here so you can see exactly what Beardash does with your API keys. 
 | HTML sanitiser and Trusted Types | `src/sanitize.ts`, `src/trusted-types.ts` |
 | Security headers (CSP) | `public/_headers` |
 | Sandboxed script preview | `public/preview-frame.html`, `src/components/PreviewFrame.tsx` |
+
+## License
+
+[Beardash License 1.0](LICENSE), adapted from the Bear Blog License 2.0. You can use, modify and share the code, but you can't offer it as a hosted or managed service.
 
 ## Credits
 

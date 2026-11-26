@@ -62,7 +62,12 @@ function dashboardDevShell(): Plugin {
   }
 }
 
+// Cloudflare Workers Builds sets the commit it's building. Baked in, it becomes the public build number,
+// so anyone can match beardash.dev to the exact commit on GitHub. Local builds have none.
+const BUILD_COMMIT = (process.env.WORKERS_CI_COMMIT_SHA ?? '').replace(/[^a-f0-9]/gi, '').slice(0, 40).toLowerCase()
+
 export default defineConfig({
+  define: { __BUILD_COMMIT__: JSON.stringify(BUILD_COMMIT) },
   plugins: [dashboardDevShell(), react(), cloudflare()],
   environments: {
     client: {

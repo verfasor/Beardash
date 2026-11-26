@@ -116,10 +116,20 @@ const DASHBOARD_HEADERS: Record<string, string> = {
   'Cache-Control': 'no-cache',
 }
 
-/** "b" (build) + the first 6 characters of this deploy's Cloudflare version id (empty if unavailable). */
-function buildLabel(env: Env) {
+declare const __BUILD_COMMIT__: string
+const REPO = 'https://github.com/verfasor/Beardash'
+const COMMIT = typeof __BUILD_COMMIT__ === 'string' ? __BUILD_COMMIT__ : ''
+
+/**
+ * The build number shown on the site.
+ * Built by Cloudflare from GitHub: the short commit hash, linked to that commit, so anyone can check
+ * that beardash.dev runs that exact code. Deployed from a laptop: "b" + the start of Cloudflare's
+ * version id, with no link, so it never claims a commit it didn't come from.
+ */
+function buildInfo(env: Env) {
+  if (COMMIT) return { label: COMMIT.slice(0, 7), url: `${REPO}/commit/${COMMIT}` }
   const id = env.CF_VERSION_METADATA?.id
-  return id ? `b${id.replace(/[^a-f0-9]/gi, '').slice(0, 6).toLowerCase()}` : ''
+  return { label: id ? `b${id.replace(/[^a-f0-9]/gi, '').slice(0, 6).toLowerCase()}` : '', url: '' }
 }
 
 // Same security headers as the dashboard, minus noindex: the landing page should be indexed.
@@ -147,10 +157,13 @@ function scheduleExample(timeZone: unknown, now = Date.now()) {
 async function landing(req: Request, env: Env) {
   const asset = await env.ASSETS.fetch(req)
   if (!asset.ok || !(asset.headers.get('content-type') ?? '').includes('text/html')) return asset
-  const build = buildLabel(env)
+  const build = buildInfo(env)
+  const buildTag = build.url
+    ? `<a class="top-build" href="${build.url}" rel="noopener" title="The commit this build came from">${build.label}</a>`
+    : `<span class="top-build">${build.label}</span>`
   const when = scheduleExample((req as Request & { cf?: { timezone?: string } }).cf?.timezone)
   const html = (await asset.text())
-    .replace('<span class="top-build"></span>', `<span class="top-build">${build}</span>`)
+    .replace('<span class="top-build"></span>', buildTag)
     .replace(/<span class="sched-day">[^<]*<\/span>/, `<span class="sched-day">${when.weekday}</span>`)
     .replace(/<span class="sched-date">[^<]*<\/span>/, `<span class="sched-date">${when.date}</span>`)
   const res = new Response(html, { status: asset.status, headers: asset.headers })
@@ -168,9 +181,10 @@ async function dashboard(req: Request, env: Env) {
   const shell = await env.ASSETS.fetch(new Request(new URL('/dashboard/', url), { method: req.method, headers: { Accept: 'text/html' } }))
   // Stamp the build number into the page: "b" + the first 6 characters of the Cloudflare version id
   let html = await shell.text()
-  const build = buildLabel(env)
-  if (build) {
-    html = html.replace('</head>', `<meta name="beardash-version" content="${build}" />\n  </head>`)
+  const build = buildInfo(env)
+  if (build.label) {
+    const source = build.url ? `\n    <meta name="beardash-source" content="${build.url}" />` : ''
+    html = html.replace('</head>', `<meta name="beardash-version" content="${build.label}" />${source}\n  </head>`)
   }
   const res = new Response(html, { status: shell.ok ? 200 : shell.status, headers: shell.headers })
   res.headers.delete('content-length')

@@ -7,6 +7,8 @@ type Theme = 'light' | 'dark' | 'system'
 
 // Set by the Worker from Cloudflare's version metadata (see worker/index.ts); "dev" when running locally.
 const BUILD = document.querySelector<HTMLMetaElement>('meta[name="beardash-version"]')?.content || (import.meta.env.DEV ? 'dev' : '')
+// The exact commit this build came from (set when Cloudflare builds from GitHub), else the repo.
+const SOURCE = document.querySelector<HTMLMetaElement>('meta[name="beardash-source"]')?.content || 'https://github.com/verfasor/Beardash'
 const THEMES: { key: Theme; label: string; icon: IconName }[] = [
   { key: 'system', label: 'System', icon: 'monitor' },
   { key: 'light', label: 'Light', icon: 'sun' },
@@ -146,6 +148,11 @@ export function SidebarMenu({
                   <span>Lock now</span>
                 </button>
               )}
+              <a data-item role="menuitem" className="app-menu-item" href={SOURCE} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>
+                <Icon name="code" />
+                <span>Source code</span>
+                <span className="app-menu-aside">{BUILD}</span>
+              </a>
               <div className="app-menu-sep" />
               <button data-item role="menuitem" className="app-menu-item" onClick={run(onSignOut)}>
                 <Icon name="logout" />
