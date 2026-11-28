@@ -8,6 +8,8 @@ import { Preview, wordStats } from '../components/Preview'
 import { PreviewFrame, type PreviewFrameHandle } from '../components/PreviewFrame'
 import { TagInput } from '../components/TagInput'
 import { ImageField } from '../components/ImageField'
+import { MetaImageModal } from '../components/MetaImage'
+import { loadStyle, type MetaImageStyle } from '../meta-image'
 import { LinkModal, ImageModal, PublishModal } from '../components/EditorModals'
 import { Icon, Skel, SkeletonRows, skelWidth, Status, Menu, Modal, relTime, useToast, useConfirm, confirmDialog, copy, MOD, type IconName } from '../ui'
 
@@ -775,6 +777,9 @@ function DetailsPanel({
   isPage: boolean
   onClose: () => void
 }) {
+  const { session } = useSession()
+  // Read the style when the generator opens, so changes made in Settings are picked up.
+  const [ogStyle, setOgStyle] = useState<MetaImageStyle | null>(null)
   const text = (k: keyof PostFields, label: string, opts: { placeholder?: string; hint?: string; type?: string } = {}) => (
     <label className="field">
       <span className="label">{label}</span>
@@ -834,7 +839,25 @@ function DetailsPanel({
               Social image
             </label>
             <ImageField id="post-meta-image" value={form.meta_image} onChange={(v) => set('meta_image', v)} />
+            <div>
+              <button type="button" className="btn btn-sm" onClick={() => setOgStyle(loadStyle(session.subdomain, session.blogTitle ?? ''))}>
+                <Icon name="image" size={14} /> Generate from title
+              </button>
+            </div>
             <small className="hint">Shown when this {isPage ? 'page' : 'post'} is shared on social media.</small>
+            {ogStyle && (
+              <MetaImageModal
+                open
+                onClose={() => setOgStyle(null)}
+                onUse={(url) => set('meta_image', url)}
+                title={form.title}
+                description={form.meta_description}
+                slug={form.slug}
+                style={ogStyle}
+                hasImage={!!form.meta_image.trim()}
+                noun={isPage ? 'page' : 'post'}
+              />
+            )}
           </div>
           {text('canonical_url', 'Canonical URL', {
             placeholder: 'https://',

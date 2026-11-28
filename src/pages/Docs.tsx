@@ -90,6 +90,13 @@ const SECTIONS: Section[] = [
             every site can show them.
           </li>
           <li>
+            <b>Generate a social image</b> <span className="beta-pill">Beta</span>: under the social image field in the settings panel,
+            click <b>Generate from title</b>. You'll see a 1200×630 card with the title and your name, and the post's description if you turn
+            it on. You can preview and reword it without changing the post. <b>Upload and use</b> sends it to your Bear media and fills in the field. Save the post to apply
+            it. Set the name, subline, avatar, colours, font, file format and whether to show the description once in <b>Settings → Social image</b>. They're saved in
+            this browser only.
+          </li>
+          <li>
             <b>Pages</b> work the same way as posts, but don't appear in your post list or feed. They're good for About or Now pages.
           </li>
         </ul>
@@ -246,6 +253,14 @@ const SECTIONS: Section[] = [
           Buninux
         </a>
         , via SVG Repo.
+      </p>
+      <p>
+        The social image generator is based on{' '}
+        <a href="https://robertbirming.com/bear-blog-meta-image-generator/" target="_blank" rel="noopener noreferrer">
+          Robert Birming's meta image generator
+        </a>
+        , the original version he made for Bear Blog's own dashboard. Beardash's version is rewritten from scratch, with its style set in
+        Settings instead of in code, and it adds a few features of its own.
       </p>
       </>
     ),

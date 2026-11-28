@@ -38,4 +38,6 @@ Made by [Mighil](https://mighil.com). Not affiliated with Bear Blog.
 
 The logo is the [Bear Face Light](https://www.svgrepo.com/svg/327853/bear-face-light) icon from the Retro Pixel Icons collection by [Buninux](https://www.svgrepo.com/author/Buninux/), via SVG Repo.
 
+The social image generator is based on [Robert Birming's meta image generator](https://robertbirming.com/bear-blog-meta-image-generator/), the original version he made for Bear Blog's own dashboard. Beardash's version is rewritten from scratch, with its style set in Settings instead of in code, and it adds a few features of its own.
+
 The landing page uses [Lusitana](https://fonts.google.com/specimen/Lusitana) by Ana Paula Megda, under the SIL Open Font License 1.1 (`public/fonts/Lusitana-OFL.txt`).

@@ -927,3 +927,15 @@ body, .main, .sidebar, .mobile-bar, .login { background: var(--page); }
 .image-field-thumb.wide { width: 54px; height: 28px; }
 .image-field-thumb.square { width: 28px; height: 28px; }
 .image-field-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Social image generator */
+.meta-image-canvas { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; border-radius: var(--r-sm); border: 1px solid var(--card-border); }
+.color-field { display: flex; gap: 6px; min-width: 0; }
+.field .color-field input[type='color'] { flex: none; width: 34px; height: 34px; padding: 2px; border: 1px solid var(--border-strong); border-radius: var(--r-sm); background: var(--bg); cursor: pointer; }
+.field .color-field input:not([type='color']) { flex: 1; min-width: 0; font-family: var(--font-mono); font-size: 12.5px; }
+.field select.select { width: 100%; min-height: 34px; padding: 6px 8px; border: 1px solid var(--border-strong); border-radius: var(--r-sm); background: var(--bg); font-size: 13.5px; }
+.meta-image-intro { margin: -8px 4px 14px; }
+.meta-image-preview { padding: 20px; background: var(--bg-subtle); border-bottom: 1px solid var(--border); border-radius: 13px 13px 0 0; margin-top: -2px; }
+.meta-image-preview .meta-image-canvas { max-width: 480px; margin: 0 auto; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); }
+.format-size { display: block; margin-top: 6px; }
+.beta-pill { display: inline-block; margin-left: 4px; padding: 0 5px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 10.5px; font-weight: 600; line-height: 15px; vertical-align: super; }

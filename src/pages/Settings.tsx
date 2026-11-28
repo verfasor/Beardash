@@ -6,15 +6,19 @@ import { setNavigationGuard, useRouter } from '../router'
 import { CodeEditor } from '../components/CodeEditor'
 import { Preview } from '../components/Preview'
 import { Skel, useToast, confirmDialog } from '../ui'
+import { MetaImageStyleForm } from '../components/MetaImage'
+import { defaultStyle, loadStyle, saveStyle, type MetaImageStyle } from '../meta-image'
 
-type Tab = 'general' | 'home' | 'nav' | 'styles' | 'seo'
-const TABS: { key: Tab; label: string; desc: string }[] = [
+type Tab = 'general' | 'home' | 'nav' | 'styles' | 'seo' | 'social'
+const TABS: { key: Tab; label: string; desc: string; beta?: boolean }[] = [
   { key: 'general', label: 'General', desc: 'Title, favicon and date format.' },
   { key: 'home', label: 'Home page', desc: 'Shown above your post list on the front page.' },
   { key: 'nav', label: 'Navigation', desc: 'Links in your blog header, written as Markdown.' },
   { key: 'styles', label: 'Theme CSS', desc: 'Custom styles applied on top of your Bear theme.' },
   { key: 'seo', label: 'SEO', desc: 'How your blog appears in search results and when shared.' },
+  { key: 'social', label: 'Social image', desc: 'The style of social images generated for posts and pages.', beta: true },
 ]
+const Beta = () => <sup className="beta-pill">Beta</sup>
 const isTab = (v: string | null): v is Tab => TABS.some((t) => t.key === v)
 
 const normalize = (b: BlogSettings): BlogSettings => {
@@ -48,6 +52,12 @@ export function Settings() {
   const [saving, setSaving] = useState(false)
   const [homeView, setHomeView] = useState<'write' | 'preview'>('write')
   const touched = useRef(false)
+  // The social image style is kept in this browser, so it saves as you type instead of through the save bar.
+  const [ogStyle, setOgStyle] = useState<MetaImageStyle>(() => loadStyle(session.subdomain, session.blogTitle ?? ''))
+  const updateOgStyle = (s: MetaImageStyle) => {
+    setOgStyle(s)
+    saveStyle(session.subdomain, s)
+  }
 
   useEffect(() => {
     bear
@@ -156,7 +166,10 @@ export function Settings() {
           <nav className="subnav">
             {TABS.map((t) => (
               <span key={t.key} className={`subnav-item ${t.key === tab ? 'active' : ''}`}>
-                {t.label}
+                <span>
+                  {t.label}
+                  {t.beta && <Beta />}
+                </span>
               </span>
             ))}
           </nav>
@@ -202,7 +215,10 @@ export function Settings() {
                 aria-current={tab === t.key ? 'page' : undefined}
                 onClick={() => setTab(t.key)}
               >
-                {t.label}
+                <span>
+                  {t.label}
+                  {t.beta && <Beta />}
+                </span>
                 {tabDirty && <span className="dirty-dot" aria-label="unsaved changes" />}
               </button>
             )
@@ -211,7 +227,10 @@ export function Settings() {
 
         <div className="settings-body">
           <div className="settings-head">
-            <h2 className="section-title">{current.label}</h2>
+            <h2 className="section-title">
+              {current.label}
+              {current.beta && <Beta />}
+            </h2>
             <p className="muted small">{current.desc}</p>
           </div>
 
@@ -260,6 +279,14 @@ export function Settings() {
                 <CodeEditor value={form.custom_styles ?? ''} onChange={set('custom_styles')} language="css" placeholder=":root { }" monospace />
               </div>
             </div>
+          )}
+
+          {tab === 'social' && (
+            <MetaImageStyleForm
+              style={ogStyle}
+              onChange={updateOgStyle}
+              onReset={() => updateOgStyle(defaultStyle(saved.title || session.blogTitle || '', session.subdomain))}
+            />
           )}
 
           {tab === 'seo' && (
