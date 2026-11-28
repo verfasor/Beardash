@@ -1,0 +1,122 @@
+<!doctype html>
+<!--
+  Beardash Theme CSS preview.
+
+  Loaded in an <iframe sandbox="allow-scripts allow-popups …"> WITHOUT allow-same-origin, so it runs as an
+  opaque origin: nothing here can read Beardash's page, storage or API keys. Beardash sends in a public page
+  of the blog plus the CSS being edited. The blog's own styles, scripts, forms and embeds are stripped, so
+  only the edited CSS styles it. Links within the blog are handed back to Beardash to load; others open in
+  a new tab.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Theme preview</title>
+  </head>
+  <body>
+    <script>
+      ;(function () {
+        var parentWin = window.parent
+        if (!parentWin || parentWin === window) return
+        var base = null
+
+        var STRIP = 'script,style,link,meta,base,iframe,frame,object,embed,form,input,button,textarea,select,noscript,template'
+        var URL_ATTRS = ['href', 'src', 'poster']
+
+        function clean(doc, baseUrl) {
+          doc.querySelectorAll(STRIP).forEach(function (el) {
+            el.remove()
+          })
+          doc.querySelectorAll('*').forEach(function (el) {
+            for (var i = el.attributes.length - 1; i >= 0; i--) {
+              var a = el.attributes[i]
+              var n = a.name.toLowerCase()
+              // Event handlers, and script URLs in any attribute (e.g. SVG xlink:href), never survive.
+              if (n.indexOf('on') === 0 || n === 'srcdoc' || n === 'formaction' || /^\s*(javascript|vbscript):/i.test(a.value)) el.removeAttribute(a.name)
+              else if (URL_ATTRS.indexOf(n) !== -1) {
+                var v = a.value.trim()
+                if (/^\s*(javascript|vbscript|data:text)/i.test(v)) el.removeAttribute(a.name)
+                else if (v.charAt(0) !== '#') {
+                  try {
+                    el.setAttribute(a.name, new URL(v, baseUrl).href)
+                  } catch (e) {}
+                }
+              } else if (n === 'srcset') {
+                el.setAttribute(
+                  'srcset',
+                  a.value
+                    .split(',')
+                    .map(function (part) {
+                      var bits = part.trim().split(/\s+/)
+                      try {
+                        bits[0] = new URL(bits[0], baseUrl).href
+                      } catch (e) {}
+                      return bits.join(' ')
+                    })
+                    .join(', '),
+                )
+              }
+            }
+          })
+        }
+
+        function render(html, url, css) {
+          base = new URL(url)
+          var doc = new DOMParser().parseFromString(html, 'text/html')
+          clean(doc, base)
+          var meta = doc.createElement('meta')
+          meta.setAttribute('name', 'viewport')
+          meta.setAttribute('content', 'width=device-width, initial-scale=1')
+          var style = doc.createElement('style')
+          style.id = 'beardash-theme'
+          style.textContent = css
+          doc.head.appendChild(meta)
+          doc.head.appendChild(style)
+          var root = document.adoptNode(doc.documentElement)
+          document.replaceChild(root, document.documentElement)
+          scrollTo(0, 0)
+        }
+
+        // Links: pages on the same blog load in the preview, everything else opens in a new tab.
+        document.addEventListener(
+          'click',
+          function (e) {
+            var a = e.target && e.target.closest ? e.target.closest('a[href]') : null
+            if (!a || !base) return
+            var href = a.getAttribute('href')
+            if (!href || href.charAt(0) === '#') return
+            var to
+            try {
+              to = new URL(href, base)
+            } catch (err) {
+              return
+            }
+            if (to.host === base.host && to.pathname.indexOf('/feed') !== 0) {
+              e.preventDefault()
+              parentWin.postMessage({ type: 'beardash:theme-nav', path: to.pathname + to.search }, '*')
+            } else {
+              a.target = '_blank'
+              a.rel = 'noopener noreferrer'
+            }
+          },
+          true,
+        )
+
+        addEventListener('message', function (e) {
+          if (e.source !== parentWin) return
+          var d = e.data
+          if (!d) return
+          if (d.type === 'beardash:theme-page' && typeof d.html === 'string' && typeof d.url === 'string') render(d.html, d.url, String(d.css || ''))
+          else if (d.type === 'beardash:theme-css') {
+            var s = document.getElementById('beardash-theme')
+            if (s) s.textContent = String(d.css || '')
+          }
+        })
+
+        parentWin.postMessage({ type: 'beardash:theme-ready' }, '*')
+      })()
+    </script>
+  </body>
+</html>

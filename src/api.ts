@@ -283,3 +283,21 @@ export const bear = {
   },
   deleteMedia: (id: string | number) => request(`/api/bear/media/${encodeURIComponent(String(id))}/`, { method: 'DELETE' }),
 }
+
+// ---------- Theme CSS preview ----------
+/** A public page of the current blog, fetched through the Worker (keyless, read-only). */
+export async function fetchBlogPage(path: string): Promise<{ status: number; url: string; html: string }> {
+  let res: Response
+  try {
+    res = await fetch(`/api/page/${encodeURIComponent(currentBlog)}?path=${encodeURIComponent(path)}`, {
+      headers: { 'X-Beardash': '1' },
+      credentials: 'omit',
+      referrerPolicy: 'no-referrer',
+    })
+  } catch {
+    throw new ApiError('Network error. Check your connection.', 0)
+  }
+  const data: any = await res.json().catch(() => null)
+  if (!res.ok || !data || typeof data.html !== 'string') throw new ApiError(data?.error || `Couldn't load your blog (${res.status})`, res.status)
+  return data
+}

@@ -97,6 +97,35 @@ app.all('/bear/:subdomain/*', async (c) => {
   return new Response(res.status === 204 ? null : res.body, { status: res.status, headers: out })
 })
 
+// /api/page/<subdomain>?path=/blog/ : a public page of the blog, for the Theme CSS preview.
+// Read-only and keyless: no API key is involved, and the HTML is returned as text, never stored.
+// The browser renders it in a sandboxed frame with the blog's own CSS and scripts stripped.
+const PAGE_PATH_RE = /^\/(?!\/)[A-Za-z0-9\-._~%/]*(?:\?[A-Za-z0-9\-._~%=&+]*)?$/
+const MAX_PAGE_BYTES = 3 * 1024 * 1024
+
+app.get('/page/:subdomain', async (c) => {
+  const subdomain = c.req.param('subdomain')
+  const path = c.req.query('path') || '/'
+  if (!SUBDOMAIN_RE.test(subdomain) || path.length > 512 || !PAGE_PATH_RE.test(path)) return c.json({ error: 'Unknown page' }, 404)
+
+  const res = await fetch(`https://${subdomain}.bearblog.dev${path}`, {
+    // Bear turns away requests that don't look like a browser.
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36 Beardash',
+      Accept: 'text/html',
+    },
+    redirect: 'follow',
+  })
+  if (!new URL(res.url).protocol.startsWith('https')) return c.json({ error: 'Unexpected redirect' }, 502)
+  if (!(res.headers.get('content-type') ?? '').includes('text/html')) return c.json({ error: "That page isn't HTML." }, 502)
+  if (Number(res.headers.get('content-length')) > MAX_PAGE_BYTES) return c.json({ error: 'That page is too large to preview.' }, 502)
+  const bytes = await res.arrayBuffer()
+  if (bytes.byteLength > MAX_PAGE_BYTES) return c.json({ error: 'That page is too large to preview.' }, 502)
+  const html = new TextDecoder().decode(bytes)
+  // The final URL (after any redirect, e.g. to a custom domain) is where relative links resolve.
+  return c.json({ status: res.status, url: res.url, html })
+})
+
 app.all('*', (c) => c.json({ error: 'Not found' }, 404))
 
 // The dashboard is a single-page app at /dashboard/…: every path under it gets the same HTML shell.
@@ -195,7 +224,7 @@ async function dashboard(req: Request, env: Env) {
 // beardash.dev/<subdomain> is a shortcut: it opens the dashboard with that blog filled in.
 // Real files and routes always win: this only applies when nothing else exists at the path.
 const SHORTCUT = /^\/([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)\/?$/i
-const RESERVED = new Set(['api', 'dashboard', 'assets', 'icons', 'preview-frame', 'index', '404'])
+const RESERVED = new Set(['api', 'dashboard', 'assets', 'icons', 'preview-frame', 'theme-frame', 'index', '404'])
 
 async function other(req: Request, env: Env) {
   const url = new URL(req.url)

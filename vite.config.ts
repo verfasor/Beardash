@@ -6,7 +6,7 @@ import { cloudflare } from '@cloudflare/vite-plugin'
 // In production the Worker serves the dashboard shell for every /dashboard/* path. In dev that
 // bypasses Vite's HTML transform (React refresh preamble, module graph), so serve it here instead.
 // Single-word paths that are real routes in dev (Vite internals, legacy redirects), never blog shortcuts.
-const DEV_RESERVED = new Set(['api', 'dashboard', 'assets', 'icons', 'preview-frame', 'index', '404', 'src', 'node_modules', 'posts', 'pages', 'media', 'settings', 'guide'])
+const DEV_RESERVED = new Set(['api', 'dashboard', 'assets', 'icons', 'preview-frame', 'theme-frame', 'index', '404', 'src', 'node_modules', 'posts', 'pages', 'media', 'settings', 'guide'])
 
 function dashboardDevShell(): Plugin {
   return {

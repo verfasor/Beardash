@@ -18,7 +18,7 @@ const SECTIONS: Section[] = [
           </li>
           <li>In Beardash, enter your blog's subdomain and paste the key.</li>
           <li>
-            Use the sidebar to move between <b>Overview</b>, <b>Posts</b>, <b>Pages</b>, <b>Media</b> and <b>Settings</b>.
+            Use the sidebar to move between <b>Overview</b>, <b>Posts</b>, <b>Pages</b>, <b>Media</b>, <b>Themes</b> and <b>Settings</b>.
           </li>
         </ol>
       </>
@@ -90,11 +90,7 @@ const SECTIONS: Section[] = [
             every site can show them.
           </li>
           <li>
-            <b>Generate a social image</b> <span className="beta-pill">Beta</span>: under the social image field in the settings panel,
-            click <b>Generate from title</b>. You'll see a 1200×630 card with the title and your name, and the post's description if you turn
-            it on. You can preview and reword it without changing the post. <b>Upload and use</b> sends it to your Bear media and fills in the field. Save the post to apply
-            it. Set the name, subline, avatar, colours, font, file format and whether to show the description once in <b>Settings → Social image</b>. They're saved in
-            this browser only.
+            No social image yet? You can generate one from the title. See <b>Social images</b> below.
           </li>
           <li>
             <b>Pages</b> work the same way as posts, but don't appear in your post list or feed. They're good for About or Now pages.
@@ -119,8 +115,77 @@ const SECTIONS: Section[] = [
           the first time you save a post, Beardash also keeps the version that was on Bear, marked <b>From Bear</b>. The same happens if
           the post was changed on Bear's site since your last save here.
         </li>
-        <li>Both live in this browser only. Use a backup (see below) to move them to another device.</li>
+        <li>
+          Your blog's CSS has history too. See <b>Themes</b> below.
+        </li>
+        <li>Autosaves and history live in this browser only. Use a backup (see below) to move them to another device.</li>
       </ul>
+    ),
+  },
+  {
+    id: 'social',
+    title: 'Social images',
+    icon: 'image',
+    body: (
+      <>
+        <p>
+          Beardash can make a social image for any post or page: a 1200×630 card with the title, your name and avatar, and optionally the
+          description. <span className="beta-pill">Beta</span>
+        </p>
+        <ol>
+          <li>
+            Set your style once in <b>Settings → Social image</b>: name, subline, avatar (a URL, an upload or one from your Library, as a
+            circle or rounded square), colours, font, whether to show the description, and the file format. The preview updates as you go.
+          </li>
+          <li>
+            In a post or page, open the settings panel and click <b>Generate from title</b> under the social image field.
+          </li>
+          <li>Check the preview. You can reword the title or description for the image without changing the post.</li>
+          <li>
+            Click <b>Upload and use</b>. The image goes to your Bear media and fills in the social image field. Or click <b>Download</b> to
+            keep a copy.
+          </li>
+          <li>Save the post to apply it.</li>
+        </ol>
+        <ul>
+          <li>
+            <b>Format:</b> PNG has the sharpest text and the largest file. JPEG is much smaller and every social site shows it. WebP is the
+            smallest, but a few social sites don't show it. Settings shows the size for each.
+          </li>
+          <li>Your style is saved in this browser only, separately for each blog.</li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    id: 'theme',
+    title: 'Themes',
+    icon: 'eye',
+    body: (
+      <>
+        <p>
+          <b>Themes</b> in the sidebar holds your blog's CSS. Above the editor are three tools: <b>Bear themes</b>, <b>History</b> and{' '}
+          <b>Preview</b>.
+        </p>
+        <ul>
+          <li>
+            <b>Preview</b> shows your CSS on your real blog, next to the editor, and updates as you type, before you save. Click links in it
+            to move around your blog, use <b>Home</b> and <b>Blog</b> to jump back, or switch to <b>Phone</b> width. Your blog's own scripts
+            don't run in the preview.
+          </li>
+          <li>
+            <b>Bear themes</b> lists Bear Blog's built-in themes, each shown on your own blog. Click through them to compare, then click{' '}
+            <b>Use</b> to put that theme's CSS in the editor. Like Bear's own theme picker, this replaces your CSS, but nothing changes on
+            your blog until you save. Then tweak it with Preview open.
+          </li>
+          <li>
+            <b>History</b> keeps each version you save, plus the one that was on Bear before your first edit (marked <b>From Bear</b>), and
+            what was in the editor whenever you switch themes. Pick one to read it, then <b>Restore this version</b> and save. The last 50
+            are kept in this browser.
+          </li>
+        </ul>
+        <p>Not happy with a change you haven't saved yet? Click <b>Discard</b> in the bar at the bottom.</p>
+      </>
     ),
   },
   {
@@ -169,7 +234,8 @@ const SECTIONS: Section[] = [
       <>
         <p>
           <b>Beardash has no database.</b> Your API keys, history and unsaved drafts stay in this browser. Requests to Bear pass through a
-          small Cloudflare Worker that stores and logs nothing.
+          small Cloudflare Worker that stores and logs nothing. The theme preview loads public pages of your blog the same way,
+          without your API key.
         </p>
         <p>
           Open <b>Keys &amp; data</b> (the shield icon at the bottom of the sidebar) to:
@@ -262,6 +328,9 @@ const SECTIONS: Section[] = [
         , the original version he made for Bear Blog's own dashboard. Beardash's version is rewritten from scratch, with its style set in
         Settings instead of in code, and it adds a few features of its own.
       </p>
+      <p>
+        The themes in the Bear themes gallery come from the official Bear Blog dashboard (last imported on Nov 28, 2026). Credit and ownership belong to the people who made them.
+      </p>
       </>
     ),
   },
@@ -274,7 +343,7 @@ export function Docs() {
       <header className="page-header">
         <div>
           <h1 className="page-title">Docs</h1>
-          <p className="page-sub">How to use Beardash: writing, publishing, history, privacy and shortcuts.</p>
+          <p className="page-sub">How to use Beardash: writing, publishing, history, social images, themes, privacy and shortcuts.</p>
         </div>
       </header>
       <div className="guide">

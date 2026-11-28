@@ -9,12 +9,11 @@ import { Skel, useToast, confirmDialog } from '../ui'
 import { MetaImageStyleForm } from '../components/MetaImage'
 import { defaultStyle, loadStyle, saveStyle, type MetaImageStyle } from '../meta-image'
 
-type Tab = 'general' | 'home' | 'nav' | 'styles' | 'seo' | 'social'
+type Tab = 'general' | 'home' | 'nav' | 'seo' | 'social'
 const TABS: { key: Tab; label: string; desc: string; beta?: boolean }[] = [
   { key: 'general', label: 'General', desc: 'Title, favicon and date format.' },
   { key: 'home', label: 'Home page', desc: 'Shown above your post list on the front page.' },
   { key: 'nav', label: 'Navigation', desc: 'Links in your blog header, written as Markdown.' },
-  { key: 'styles', label: 'Theme CSS', desc: 'Custom styles applied on top of your Bear theme.' },
   { key: 'seo', label: 'SEO', desc: 'How your blog appears in search results and when shared.' },
   { key: 'social', label: 'Social image', desc: 'The style of social images generated for posts and pages.', beta: true },
 ]
@@ -27,7 +26,8 @@ const normalize = (b: BlogSettings): BlogSettings => {
   return out
 }
 
-const KEYS: (keyof BlogSettings)[] = ['title', 'content', 'favicon', 'meta_description', 'meta_image', 'nav', 'custom_styles', 'robots_txt', 'date_format']
+// The blog's CSS (custom_styles) has its own page: see Themes.tsx.
+const KEYS: (keyof BlogSettings)[] = ['title', 'content', 'favicon', 'meta_description', 'meta_image', 'nav', 'robots_txt', 'date_format']
 
 export function Settings() {
   const toast = useToast()
@@ -40,6 +40,10 @@ export function Settings() {
     setTabState(t)
     navigate(t === 'general' ? '/settings' : `/settings?tab=${t}`, { replace: true })
   }
+  // The CSS tab became its own page.
+  useEffect(() => {
+    if (urlTab === 'styles') navigate('/themes', { replace: true })
+  }, [urlTab, navigate])
   useEffect(() => {
     if (isTab(urlTab) && urlTab !== tab) setTabState(urlTab)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -206,7 +210,6 @@ export function Settings() {
               (t.key === 'general' && ('title' in changed || 'favicon' in changed || 'date_format' in changed)) ||
               (t.key === 'home' && 'content' in changed) ||
               (t.key === 'nav' && 'nav' in changed) ||
-              (t.key === 'styles' && 'custom_styles' in changed) ||
               (t.key === 'seo' && ('meta_description' in changed || 'meta_image' in changed || 'robots_txt' in changed))
             return (
               <button
@@ -269,14 +272,6 @@ export function Settings() {
             <div className="editor-frame">
               <div className="editor-frame-body short">
                 <CodeEditor value={form.nav ?? ''} onChange={set('nav')} placeholder="[Home](/) [Blog](/blog/) [About](/about/)" monospace />
-              </div>
-            </div>
-          )}
-
-          {tab === 'styles' && (
-            <div className="editor-frame">
-              <div className="editor-frame-body">
-                <CodeEditor value={form.custom_styles ?? ''} onChange={set('custom_styles')} language="css" placeholder=":root { }" monospace />
               </div>
             </div>
           )}

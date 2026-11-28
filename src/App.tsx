@@ -15,6 +15,7 @@ import { PostList } from './pages/PostList'
 import { PostEditor } from './pages/PostEditor'
 import { MediaLibrary } from './pages/MediaLibrary'
 import { Settings } from './pages/Settings'
+import { Themes } from './pages/Themes'
 import { Docs } from './pages/Docs'
 
 type Ctx = {
@@ -258,6 +259,7 @@ function Shell() {
     page = <PostEditor key={m.uid} uid={m.uid} isPage={path.startsWith('/pages')} />
     isEditor = true
   } else if (path === '/media') page = <MediaLibrary />
+  else if (path === '/themes') page = <Themes />
   else if (path === '/settings') page = <Settings />
   else if (path === '/docs' || path === '/guide') page = <Docs />
   else
@@ -275,6 +277,7 @@ function Shell() {
     { to: '/posts', label: 'Posts', icon: 'posts' as const, active: path.startsWith('/posts') },
     { to: '/pages', label: 'Pages', icon: 'pages' as const, active: path.startsWith('/pages') },
     { to: '/media', label: 'Media', icon: 'media' as const, active: path === '/media' },
+    { to: '/themes', label: 'Themes', icon: 'palette' as const, active: path === '/themes' },
     { to: '/settings', label: 'Settings', icon: 'settings' as const, active: path === '/settings' },
     { to: '/docs', label: 'Docs', icon: 'info' as const, active: path === '/docs' || path === '/guide' },
   ]

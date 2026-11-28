@@ -18,7 +18,7 @@
     // "/" is the static landing page; the app is a single-page app under /dashboard/ (served by the Worker).
     "not_found_handling": "404-page",
     // The Worker sees /, /api/*, /dashboard* and single-word paths (the beardash.dev/<subdomain> shortcut). Files, hashed bundles,
-    // icons, the preview sandbox and legacy redirects go straight to static assets.
-    "run_worker_first": ["/*", "!/*.*", "!/assets/*", "!/icons/*", "!/preview-frame", "!/posts", "!/posts/*", "!/pages", "!/pages/*", "!/media", "!/settings", "!/guide"]
+    // icons, the preview sandboxes and legacy redirects go straight to static assets.
+    "run_worker_first": ["/*", "!/*.*", "!/assets/*", "!/icons/*", "!/preview-frame", "!/theme-frame", "!/posts", "!/posts/*", "!/pages", "!/pages/*", "!/media", "!/settings", "!/guide"]
   }
 }

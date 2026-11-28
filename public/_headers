@@ -30,6 +30,21 @@
   ! Cross-Origin-Resource-Policy
   Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' https:; style-src 'unsafe-inline' https:; img-src https: data: blob:; media-src https: data: blob:; font-src https: data:; connect-src https: wss:; frame-src https:; form-action https:; base-uri 'none'; frame-ancestors 'self' https: http://localhost:*
 
+# The Theme CSS preview. Also always sandboxed without allow-same-origin. It shows a public page of the
+# blog with the blog's own scripts removed; only its own inline bootstrap runs, and it can't fetch anything.
+/theme-frame
+  ! Content-Security-Policy
+  ! X-Frame-Options
+  ! Cross-Origin-Opener-Policy
+  ! Cross-Origin-Resource-Policy
+  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https:; img-src https: data:; media-src https: data:; font-src https: data:; connect-src 'none'; frame-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'self' http://localhost:*
+/theme-frame.html
+  ! Content-Security-Policy
+  ! X-Frame-Options
+  ! Cross-Origin-Opener-Policy
+  ! Cross-Origin-Resource-Policy
+  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https:; img-src https: data:; media-src https: data:; font-src https: data:; connect-src 'none'; frame-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'self' http://localhost:*
+
 # PWA files: always revalidate the service worker so updates roll out; serve the manifest with its proper type.
 /sw.js
   Cache-Control: no-cache
