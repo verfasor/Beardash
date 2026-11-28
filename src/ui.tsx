@@ -359,12 +359,13 @@ export function relTime(input: string | number | Date | null | undefined) {
   return rtf.format(Math.round(diff / size), unit)
 }
 
-export function fmtDate(input: string | null | undefined, withTime = false) {
+/** Short date. The year is left off for this year unless `alwaysYear` is set (the posts and pages lists). */
+export function fmtDate(input: string | null | undefined, withTime = false, alwaysYear = false) {
   if (!input) return ''
   const d = new Date(input)
   const sameYear = d.getFullYear() === new Date().getFullYear()
   return d.toLocaleDateString(undefined, {
-    year: sameYear ? undefined : 'numeric',
+    year: sameYear && !alwaysYear ? undefined : 'numeric',
     month: 'short',
     day: 'numeric',
     ...(withTime ? { hour: 'numeric', minute: '2-digit' } : {}),

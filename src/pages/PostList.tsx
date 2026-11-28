@@ -191,7 +191,7 @@ export function PostList({ kind }: { kind: 'post' | 'page' }) {
                   <span className="row-title">{p.title || 'Untitled'}</span>
                   <span className="row-sub">
                     {/* phones hide the Date column, so the date rides along here */}
-                    <span className="row-date">{st === 'draft' ? `Edited ${relTime(p.last_modified)}` : fmtDate(p.published_date, st === 'scheduled')}</span>
+                    <span className="row-date">{st === 'draft' ? `Edited ${relTime(p.last_modified)}` : fmtDate(p.published_date, st === 'scheduled', true)}</span>
                     /{p.slug}
                     {p.tags?.length ? <span className="row-tags">{p.tags.slice(0, 3).map((t) => `#${t}`).join(' ')}</span> : null}
                   </span>
@@ -200,7 +200,7 @@ export function PostList({ kind }: { kind: 'post' | 'page' }) {
                   <Status status={st} />
                 </span>
                 <span role="cell" className="cell-date" title={p.published_date ? new Date(p.published_date).toLocaleString() : undefined}>
-                  {st === 'draft' ? `Edited ${relTime(p.last_modified)}` : fmtDate(p.published_date, st === 'scheduled')}
+                  {st === 'draft' ? `Edited ${relTime(p.last_modified)}` : fmtDate(p.published_date, st === 'scheduled', true)}
                 </span>
                 <span role="cell" className="cell-actions">
                   <Menu
